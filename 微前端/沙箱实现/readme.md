@@ -13,14 +13,14 @@
 - 快照沙箱只支持单个应用
 ```
 class SnapShotSandBox {
-    constructor(){
+  constructor(){
     this.proxy = window;
     this.modifyPropsMap = {};
     this.active();
   }
     active(){
-        this.windowSnapShot = {}; // 1.拍照
-    for(const prop in window) {
+      this.windowSnapShot = {}; // 1.拍照
+      for(const prop in window) {
         if (window.hasOwnProperty(prop)) {
         this.windowSnapShot[prop] = window[prop];
       }
@@ -31,9 +31,9 @@ class SnapShotSandBox {
   }
   inactive(){
     for(const prop in window) {
-        if(window.hasOwnProperty(prop)) {
+      if(window.hasOwnProperty(prop)) {
         if (window[prop] !== this.windowSnapShot[prop]) { 
-            this.modifyPropsMap[prop] = window[prop]; // 1.记录变化
+          this.modifyPropsMap[prop] = window[prop]; // 1.记录变化
           window[prop] = this.windowSnapShot[prop]; // 2.还原属性
         }
       }
@@ -43,7 +43,7 @@ class SnapShotSandBox {
 // test
 const sandBox = new SnapShotSandBox();
 ((window) => {
-    window.a = 1;
+  window.a = 1;
   window.b = 2;
   console.log(window.a, window.b);
   sandBox.inactive();
@@ -62,9 +62,9 @@ const sandBox = new SnapShotSandBox();
 ```
 class ProxySandBox {
     constructor() {
-        const rawWindow = window;
-    const fakeWindow = {};
-    const proxy = new Proxy(fakeWindow, {
+      const rawWindow = window;
+      const fakeWindow = {};
+      const proxy = new Proxy(fakeWindow, {
         set(target, prop, value){
         target[prop] = value;
         return true;
@@ -78,10 +78,12 @@ class ProxySandBox {
 }
 let sandBox1 = new ProxySandBox();
 let sandBox2 = new ProxySandBox();
+
 ((window) => {
   window.a = 1;
   console.log(window.a)
 })(sandBox1.proxy);
+
 ((window) => {
   window.a = '2';
   console.log(window.a)
