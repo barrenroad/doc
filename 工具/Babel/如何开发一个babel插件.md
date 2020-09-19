@@ -55,17 +55,25 @@ $ npm install babel-core
 ```
 ```
 var babel = require("babel-core") 
-// 字符串形式的 JavaScript 代码可以直接使用 babel.transform 来编译。
+```
+字符串形式的 JavaScript 代码可以直接使用 babel.transform 来编译。
+```
 babel.transform("code();", options);
 // => { code, map, ast }
-// 如果是文件的话，可以使用异步 api：
+```
+如果是文件的话，可以使用异步 api：
+```
 babel.transformFile("filename.js", options, function(err, result) {
   result; // => { code, map, ast }
 });
-// 或者是同步 api：
+```
+或者是同步 api：
+```
 babel.transformFileSync("filename.js", options);
 // => { code, map, ast }
-// 要是已经有一个 Babel AST（抽象语法树）了就可以直接从 AST 进行转换。
+```
+要是已经有一个 Babel AST（抽象语法树）了就可以直接从 AST 进行转换。
+```
 babel.transformFromAst(ast, code, options);
 // => { code, map, ast }
 ```
@@ -77,9 +85,9 @@ babel.transformFromAst(ast, code, options);
 
 这是因为我们还没告诉 Babel 要做什么。
 
-由于 Babel 是一个可以用各种花样去使用的通用编译器，因此默认情况下它反而什么都不做。你必须明确地告诉 Babel 应该要做什么。
+由于 `Babel` 是一个可以用各种花样去使用的通用编译器，因此默认情况下它反而什么都不做。你必须明确地告诉 Babel 应该要做什么。
 
-我们一般项目中会对babel进行一些配置，主要是在 .babelrc 中对 presets 和 plugins 配置。
+我们一般项目中会对babel进行一些配置，主要是在 `.babelrc` 中对 `presets` 和 `plugins` 配置。
 
 - <strong>presets</strong> （预设）就是一组插件，比如官方封装好的 `@babel/preset-react `，其中就包括以下插件`@babel/plugin-syntax-jsx`，`@babel/plugin-transform-react-jsx`，`@babel/plugin-transform-react-display-name`。
 - <strong>plugins</strong> 相对来说功能比较单一，比如`transform-es2015-arrow-functions`，这个插件只负责转译es2015新增的箭头函数。
